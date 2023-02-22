@@ -3,6 +3,5 @@ interface Props {
 }
 
 export const Index = ({ name }: Props) => {
-  console.log(name)
   return <></>
 }
