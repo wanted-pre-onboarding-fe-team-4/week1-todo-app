@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const useLoggedIn = () => {
+export const useLoggedIn = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -13,5 +13,3 @@ const useLoggedIn = () => {
     if (authUrls.includes(url) && token) navigate('/todo')
   }, [])
 }
-
-export default useLoggedIn
