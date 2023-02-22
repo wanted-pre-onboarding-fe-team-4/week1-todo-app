@@ -1,11 +1,7 @@
 import AppRouter from 'components/commons/routes/AppRouter'
 
 function App() {
-  return (
-    <>
-      <AppRouter />
-    </>
-  )
+  return <AppRouter />
 }
 
 export default App
