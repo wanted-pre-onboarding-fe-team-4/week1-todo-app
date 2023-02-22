@@ -1,5 +1,5 @@
-import API from '@src/api'
-import { ErrorsType } from '@src/types/ErrorsType'
+import API from 'api'
+import { ErrorsType } from 'types/ErrorsType'
 import { isAxiosError, Method } from 'axios'
 import { useCallback, useState } from 'react'
 
