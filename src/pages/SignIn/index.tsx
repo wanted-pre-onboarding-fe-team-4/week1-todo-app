@@ -64,7 +64,7 @@ export const SignInPage = () => {
       />
       <CommonButton
         testId='signin-button'
-        text='로그인11'
+        text='로그인'
         onClick={submitHandler}
         disabled={!formValid}
         height={80}
