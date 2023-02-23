@@ -1,7 +1,3 @@
-interface Props {
-  name: any
-}
-
-export const Index = ({ name }: Props) => {
+export const Index = () => {
   return <></>
 }
