@@ -10,9 +10,28 @@ export const TodoPage = () => {
     url: `/todos`,
   })
 
+  // const { query: updateTodo } = useQuery({
+  //   method: 'put',
+  //   url: `/todos/${id}`,
+  // })
+
+  // const onClickUpdateTodo = async (todo: string, isComplted: boolean) => {
+  //   await updateTodo({ todo, isComplted })
+  //   await getTodo()
+  // }
+
+  // const { query: deleteTodo } = useQuery({
+  //   method: 'delete',
+  //   url: `/todos/${id}`,
+  // })
+
+  // const onClickDeleteToDo = async () => {
+  //   await deleteTodo()
+  //   await getTodo()
+  // }
+
   const handleSubmit = async () => {
     await createTodo({ todo: '투두리스트 샘플1' })
-    // 데이터 새로불러오기
     await getTodo()
   }
 
