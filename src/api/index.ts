@@ -4,12 +4,11 @@ const baseURL = 'https://pre-onboarding-selection-task.shop'
 
 const API = axios.create({
   baseURL,
-  withCredentials: true,
 })
 
 API.interceptors.request.use(async (config) => {
   const token = localStorage.getItem('access_token')
-  if (token) config.headers['Authorization'] = token
+  if (token) config.headers['Authorization'] = `Bearer ${token}`
 
   return config
 })
