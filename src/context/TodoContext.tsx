@@ -1,9 +1,10 @@
-import { createContext } from 'react'
+import { createContext, Dispatch, SetStateAction } from 'react'
+import { ITodo } from 'types/ITodo'
 
 export const TodoContext = createContext<{
-  todoData: any
-  setTodoData: any
-  getTodo: any
+  todoData: ITodo[]
+  setTodoData: Dispatch<SetStateAction<ITodo[]>>
+  getTodo: () => Promise<void>
 }>({
   todoData: [],
   setTodoData: () => {
