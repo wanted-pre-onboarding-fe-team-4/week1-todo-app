@@ -1,3 +1,4 @@
+import { DefaultLayout } from 'components/Layouts/DefaultLayout'
 import { MainPage } from 'pages/Main'
 import { NotFoundPage } from 'pages/NotFound'
 import { SignInPage } from 'pages/SignIn'
@@ -9,11 +10,13 @@ export default function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/signin' element={<SignInPage />} />
-        <Route path='/todo' element={<TodoPage />} />
-        <Route path='/*' element={<NotFoundPage />} />
+        <Route element={<DefaultLayout />}>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/todo' element={<TodoPage />} />
+          <Route path='/*' element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </Router>
   )
