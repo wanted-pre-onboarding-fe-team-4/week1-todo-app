@@ -3,6 +3,7 @@ import { useSignInApi } from 'api/signInApi'
 import { CommonButton } from 'components/commons/buttons/CommonButton'
 import { useLoggedIn } from 'hooks/useLoggedIn'
 import { Wrapper, SignInInput } from './style'
+import { useNavigate } from 'react-router-dom'
 
 type OnChangeHandler = ComponentProps<'input'>['onChange']
 type OnKeyDownHandler = ComponentProps<'input'>['onKeyDown']
@@ -10,6 +11,8 @@ type OnClickHandler = ComponentProps<'button'>['onClick']
 
 export const SignInPage = () => {
   useLoggedIn()
+
+  const navigate = useNavigate()
 
   const signinApi = useSignInApi()
 
@@ -36,6 +39,10 @@ export const SignInPage = () => {
 
   const submitHandler: OnClickHandler = () => {
     signin()
+  }
+
+  const clickHandler: OnClickHandler = () => {
+    navigate('/signup')
   }
 
   const onKeyDownHandler: OnKeyDownHandler = (e) => {
@@ -67,6 +74,12 @@ export const SignInPage = () => {
         text='로그인'
         onClick={submitHandler}
         disabled={!formValid}
+        height={80}
+      />
+      <CommonButton
+        text='회원가입 하기'
+        onClick={clickHandler}
+        disabled={false}
         height={80}
       />
     </Wrapper>
