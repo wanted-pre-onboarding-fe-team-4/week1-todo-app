@@ -16,23 +16,23 @@ export const TodoPage = () => {
     url: `/todos/1`,
   })
 
-  const onClickUpdateTodo = async (todo: string, isCompleted: boolean) => {
-    await updateTodo({ todo, isCompleted })
-    await getTodo()
-  }
-
   const { query: deleteTodo } = useQuery({
     method: 'delete',
     url: `/todos/1`,
   })
 
-  const onClickDeleteToDo = async () => {
-    await deleteTodo()
+  const handleSubmit = async () => {
+    await createTodo({ todo: '투두리스트 샘플1' })
     await getTodo()
   }
 
-  const handleSubmit = async () => {
-    await createTodo({ todo: '투두리스트 샘플1' })
+  const onClickUpdateTodo = async (todo: string, isCompleted: boolean) => {
+    await updateTodo({ todo, isCompleted })
+    await getTodo()
+  }
+
+  const onClickDeleteToDo = async () => {
+    await deleteTodo()
     await getTodo()
   }
 
