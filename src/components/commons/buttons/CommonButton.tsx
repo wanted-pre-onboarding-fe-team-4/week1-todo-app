@@ -4,10 +4,11 @@ import { colors } from '../styles/colors'
 interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   text: string
   disabled: boolean
-  onClick: () => void
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
   backgroundColor?: string
   width?: number
   height?: number
+  testId?: string
 }
 
 /**
@@ -20,6 +21,7 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
  * @param backgroundColor - 기본 값은 gray 입니다.
  * @param width - 버튼 px 넓이 (기본값 100%)
  * @param height - 버튼 px 높이 (기본값 100%)
+ * @param testId - data-testid 값
  */
 
 export const CommonButton = (props: ButtonProps) => {
@@ -30,6 +32,7 @@ export const CommonButton = (props: ButtonProps) => {
       width={props.width}
       height={props.height}
       disabled={props.disabled}
+      data-testid={props.testId}
     >
       {props.text}
     </ButtonWrap>
