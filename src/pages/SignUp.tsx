@@ -1,17 +1,22 @@
 import { useQuery } from 'hooks/useQuery'
 import { useState } from 'react'
 
+const useSignUpApi = () => {
+  const { query } = useQuery({
+    method: 'post',
+    url: `/auth/signup`,
+  })
+  return query
+}
+
 export const SignUpPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { query: signup } = useQuery({
-    method: 'post',
-    url: `/auth/signup`,
-  })
+  const signupApi = useSignUpApi()
 
   const onClickSignup = async () => {
-    await signup({ email, password })
+    await signupApi({ email, password })
   }
 
   return (
