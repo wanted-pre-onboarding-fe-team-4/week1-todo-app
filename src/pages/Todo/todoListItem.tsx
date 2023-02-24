@@ -123,7 +123,9 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
   )
 }
 
-const StyledCheckBox = styled.input``
+const StyledCheckBox = styled.input`
+  cursor: pointer;
+`
 const ListItemWrap = styled.div`
   display: flex;
   justify-content: space-between;
