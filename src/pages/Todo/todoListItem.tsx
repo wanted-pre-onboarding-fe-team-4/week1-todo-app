@@ -79,7 +79,10 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
             <>
               <CommonButton
                 width={100}
-                onClick={onClickToggleEdit}
+                onClick={() => {
+                  onClickToggleEdit()
+                  setEditTodoTxt(todo)
+                }}
                 text={'취소'}
                 disabled={false}
                 backgroundColor={colors.red}
