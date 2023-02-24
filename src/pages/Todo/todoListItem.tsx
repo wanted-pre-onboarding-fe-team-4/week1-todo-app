@@ -69,7 +69,9 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
             width={300}
           />
         ) : (
-          todo
+          <Todo style={{ textDecoration: isCompleted ? 'line-through' : '' }}>
+            {todo}
+          </Todo>
         )}
         <ButtonArea>
           {isShowEdit ? (
@@ -125,6 +127,11 @@ const ListItemWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin-left: 10px;
+`
+
+const Todo = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 const ButtonArea = styled.div`
