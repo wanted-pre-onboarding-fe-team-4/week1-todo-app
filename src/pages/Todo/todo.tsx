@@ -23,6 +23,7 @@ export const Todo = () => {
   const handleSubmit = async () => {
     await createTodo({ todo: todoText })
     await getTodo()
+    setTodoText('')
   }
 
   const handleTodoChange: OnChangeHandler = (e) => {
@@ -34,6 +35,7 @@ export const Todo = () => {
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       await createTodo({ todo: todoText })
       await getTodo()
+      setTodoText('')
     }
   }
 
