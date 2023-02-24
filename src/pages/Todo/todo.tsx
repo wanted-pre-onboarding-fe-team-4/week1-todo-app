@@ -4,11 +4,14 @@ import { useQuery } from 'hooks/useQuery'
 import { CommonButton } from 'components/commons/buttons/CommonButton'
 import { TodoInput } from './style'
 import { TodoListItem } from './todoListItem'
+import { useLoggedIn } from 'hooks/useLoggedIn'
 
 type OnChangeHandler = ComponentProps<'input'>['onChange']
 type OnKeyDownHandler = ComponentProps<'input'>['onKeyDown']
 
 export const Todo = () => {
+  useLoggedIn()
+
   const { todoData, getTodo } = useContext(TodoContext)
   const [todoText, setTodoText] = useState('')
 
@@ -20,6 +23,7 @@ export const Todo = () => {
   const handleSubmit = async () => {
     await createTodo({ todo: todoText })
     await getTodo()
+    setTodoText('')
   }
 
   const handleTodoChange: OnChangeHandler = (e) => {
@@ -31,6 +35,7 @@ export const Todo = () => {
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       await createTodo({ todo: todoText })
       await getTodo()
+      setTodoText('')
     }
   }
 

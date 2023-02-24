@@ -16,7 +16,7 @@ type OnChangeHandler = ComponentProps<'input'>['onChange']
 
 export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
   const [isShowEdit, setIsShowEdit] = useState(false)
-  const [editTodoTxt, setEditTodoTxt] = useState('')
+  const [editTodoTxt, setEditTodoTxt] = useState(todo)
   const { getTodo } = useContext(TodoContext)
 
   const { query: updateTodo } = useQuery({
@@ -67,6 +67,7 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
             data-testid='modify-input'
             onChange={handleEditTodoTxtChange}
             width={300}
+            value={editTodoTxt}
           />
         ) : (
           <Todo style={{ textDecoration: isCompleted ? 'line-through' : '' }}>
