@@ -83,51 +83,12 @@
 - [PR에 issue 연계](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)
 
 ### 2. `useQuery` (api query custom hook 개발)
-- `useQuery custom hook`을 개발하여 api를 따로 개발하지 않아도, 에러핸들링, 토큰 headers에 추가 등 api 공통화를 채택하였습니다.
+- `useQuery custom hook`을 개발하여 query를 간편하게 날릴 수 있도록 했습니다.
 - 채택 사유
   - 매개변수에 method 와 url만 넣어도 api 호출이 되기에 **코드의 통일성과 협업속도**에 큰 도움이 된다 생각했습니다.
   - 공통 에러 핸들링이 되어있어서 에러핸들링 수정 시 useQuery 만 수정해주면 되기에 **유지/ 보수**에 좋았습니다.
-  - **토큰 값 관리**도 useQuery 통해서 공통으로 작업할 수 있었습니다.
-```ts
-// 참고 파일 - src/api/index.ts
-import axios, { isAxiosError } from 'axios'
 
-const baseURL = 'https://pre-onboarding-selection-task.shop'
-
-const API = axios.create({
-  baseURL,
-})
-
-// api 호출 전 localstorage에 토큰 존재 시 Authorization에 추가
-API.interceptors.request.use(async (config) => {
-  const token = localStorage.getItem('access_token')
-  if (token) config.headers['Authorization'] = `Bearer ${token}`
-
-  return config
-})
-
-// signin 호출 전 토큰값 localstorage에 저장
-API.interceptors.response.use(
-  (res) => {
-    if (res.config.url === '/auth/signin')
-      localStorage.setItem('access_token', res.data.access_token)
-
-    return res
-  },
-  (e) => {
-    if (!isAxiosError(e) && e.response?.status === 401) {
-      localStorage.removeItem('access_token')
-      window.location.replace('/signin')
-    }
-
-    return Promise.reject(e)
-  }
-)
-
-export default API
-```
-
-```ts
+```tsx
 // 참고 파일 - src/hooks/useQuery.tsx
 import API from 'api'
 ...
@@ -197,11 +158,21 @@ export const useQuery = <T,>({
   const { query: createTodo } = useQuery({
     method: 'post',
     url: `/todos`,
+    onSuccess: () => { // 성공시 실행
+      console.log('성공')
+    },
+    onFailure: () => { // 실패시 실행
+      console.log('실패')
+    },
+    successMessage: '성공~', // 성공시 alert로 띄워질 메시지
+    errors: {
+      401: '권한이 없습니다', // 실패시 특정 status code에서 alert로 띄워질 메시지
+    },
   })
   ...
-   const handleSubmit = async () => {
-    await createTodo({ todo: todoText })
-    await getTodo()
+  const handleSubmit = async () => {
+  await createTodo({ todo: todoText })
+  await getTodo()
   }
   ...
 ```
