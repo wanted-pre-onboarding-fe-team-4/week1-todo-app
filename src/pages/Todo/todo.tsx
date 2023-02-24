@@ -2,7 +2,7 @@ import { ComponentProps, useContext, useState } from 'react'
 import { TodoContext } from 'context/TodoContext'
 import { useQuery } from 'hooks/useQuery'
 import { CommonButton } from 'components/commons/buttons/CommonButton'
-import { TodoInput } from './style'
+import { TodoInput, TodoListArea } from './style'
 import { TodoListItem } from './todoListItem'
 import { useLoggedIn } from 'hooks/useLoggedIn'
 
@@ -52,8 +52,10 @@ export const Todo = () => {
         onClick={handleSubmit}
         text={'추가'}
         disabled={false}
+        height={50}
         data-testid='new-todo-add-button'
       />
+      <TodoListArea>
       {todoData.map((el) => {
         return (
           <TodoListItem
@@ -64,6 +66,8 @@ export const Todo = () => {
           />
         )
       })}
+</TodoListArea>
+
     </>
   )
 }
