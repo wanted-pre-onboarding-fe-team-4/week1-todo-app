@@ -63,42 +63,57 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
           onChange={(e) => handleCompletedChange(e)}
         />
         {isShowEdit ? (
-          <CommonInput onChange={handleEditTodoTxtChange} width={300} />
+          <CommonInput
+            data-testid='modify-input'
+            onChange={handleEditTodoTxtChange}
+            width={300}
+          />
         ) : (
           todo
         )}
         <ButtonArea>
           {isShowEdit ? (
-            <CommonButton
-              width={100}
-              onClick={onClickToggleEdit}
-              text={'취소'}
-              disabled={false}
-              backgroundColor={colors.red}
-            />
+            <>
+              <CommonButton
+                width={100}
+                onClick={onClickToggleEdit}
+                text={'취소'}
+                disabled={false}
+                backgroundColor={colors.red}
+                data-testid='cancel-button'
+              />
+              <CommonButton
+                width={100}
+                onClick={() => {
+                  onClickUpdateTodo(editTodoTxt, isCompleted)
+                  onClickToggleEdit()
+                }}
+                text={'제출'}
+                disabled={false}
+                backgroundColor={colors.ligntMain}
+                data-testid='submit-button'
+              />
+            </>
           ) : (
-            <CommonButton
-              width={100}
-              onClick={onClickDeleteToDo}
-              text={'삭제'}
-              disabled={false}
-              backgroundColor={colors.red}
-            />
+            <>
+              <CommonButton
+                width={100}
+                onClick={onClickDeleteToDo}
+                text={'삭제'}
+                disabled={false}
+                backgroundColor={colors.red}
+                data-testid='delete-button'
+              />
+              <CommonButton
+                width={100}
+                onClick={() => onClickToggleEdit()}
+                text={'수정'}
+                disabled={false}
+                backgroundColor={colors.ligntMain}
+                data-testid='modify-button'
+              />
+            </>
           )}
-          <CommonButton
-            width={100}
-            onClick={
-              isShowEdit
-                ? () => {
-                    onClickUpdateTodo(editTodoTxt, isCompleted)
-                    onClickToggleEdit()
-                  }
-                : onClickToggleEdit
-            }
-            text={'수정'}
-            disabled={false}
-            backgroundColor={colors.ligntMain}
-          />
         </ButtonArea>
       </ListItemWrap>
     </>

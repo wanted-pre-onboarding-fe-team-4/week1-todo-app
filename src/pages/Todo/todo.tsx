@@ -41,8 +41,14 @@ export const Todo = () => {
         type='text'
         onChange={handleTodoChange}
         onKeyDown={handleEnter}
+        data-testid='new-todo-input'
       />
-      <CommonButton onClick={handleSubmit} text={'추가'} disabled={false} />
+      <CommonButton
+        onClick={handleSubmit}
+        text={'추가'}
+        disabled={false}
+        data-testid='new-todo-add-button'
+      />
       {todoData.map((el) => {
         return (
           <TodoListItem
