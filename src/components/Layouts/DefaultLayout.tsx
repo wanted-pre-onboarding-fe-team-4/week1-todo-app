@@ -29,7 +29,7 @@ const LayoutWrap = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 100px;
+  margin: auto;
 `
 
 const InnerWrap = styled.div`

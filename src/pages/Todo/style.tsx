@@ -6,6 +6,14 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   width: 100%;
+  max-height:385px;
+`
+
+export const TodoListArea = styled.div`
+  overflow-y:auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `
 
 interface todoInputProps {
