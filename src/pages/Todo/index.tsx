@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from 'hooks/useQuery'
 import { TodoContext } from 'context/TodoContext'
-import { TodoPage } from './Todo'
+import { Todo } from './todo'
+import { Wrapper } from './style'
+// import { ITodo } from '../../types/ITodo'
 
-export const TodoContainer = () => {
+export const TodoPage = () => {
   const [todoData, setTodoData] = useState<any>([])
 
   //todo 불러오기
   const { query: getTodo, data } = useQuery({
-    method: 'get',
     url: `/todos`,
+    method: 'get',
   })
 
   //처음에 todo 데이터 불러오기
@@ -26,7 +28,9 @@ export const TodoContainer = () => {
 
   return (
     <TodoContext.Provider value={{ todoData, setTodoData, getTodo }}>
-      <TodoPage />
+      <Wrapper>
+        <Todo />
+      </Wrapper>
     </TodoContext.Provider>
   )
 }
