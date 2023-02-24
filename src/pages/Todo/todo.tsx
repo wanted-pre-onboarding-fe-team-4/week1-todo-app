@@ -3,40 +3,22 @@ import { TodoContext } from 'context/TodoContext'
 import { useQuery } from 'hooks/useQuery'
 import { CommonButton } from 'components/commons/buttons/CommonButton'
 import { TodoInput } from './style'
+import { TodoListItem } from './todoListItem'
 
 type OnChangeHandler = ComponentProps<'input'>['onChange']
+type OnKeyDownHandler = ComponentProps<'input'>['onKeyDown']
 
 export const Todo = () => {
-  const { todoData, getTodo } = useContext(TodoContext);
-  const [todoText, setTodoText] = useState('');
-  
+  const { todoData, getTodo } = useContext(TodoContext)
+  const [todoText, setTodoText] = useState('')
+
   const { query: createTodo } = useQuery({
     method: 'post',
     url: `/todos`,
   })
 
-  const { query: updateTodo } = useQuery({
-    method: 'put',
-    url: `/todos/1`,
-  })
-
-  const { query: deleteTodo } = useQuery({
-    method: 'delete',
-    url: `/todos/1`,
-  })
-
   const handleSubmit = async () => {
     await createTodo({ todo: todoText })
-    await getTodo()
-  }
-
-  const onClickUpdateTodo = async (todo: string, isCompleted: boolean) => {
-    await updateTodo({ todo, isCompleted })
-    await getTodo()
-  }
-
-  const onClickDeleteToDo = async () => {
-    await deleteTodo()
     await getTodo()
   }
 
@@ -45,50 +27,32 @@ export const Todo = () => {
     setTodoText(newValue)
   }
 
+  const handleEnter: OnKeyDownHandler = async (e) => {
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
+      await createTodo({ todo: todoText })
+      await getTodo()
+    }
+  }
+
   return (
     <>
-      <TodoInput 
+      <TodoInput
         value={todoText}
         type='text'
         onChange={handleTodoChange}
+        onKeyDown={handleEnter}
       />
-      <CommonButton
-        onClick={handleSubmit}
-        text={'추가'}
-        disabled={false}
-      />
-    {
-      todoData.map((a, i) => {
+      <CommonButton onClick={handleSubmit} text={'추가'} disabled={false} />
+      {todoData.map((el) => {
         return (
-          <div 
-            key={i}
-            style={{
-              display: 'flex',
-              width: '300px'
-            }}
-          >
-            {a.todo}
-            <div
-              style={{
-                display: 'flex',
-                width: '300px'
-              }}
-            >
-              <CommonButton
-                onClick={onClickDeleteToDo}
-                text={'삭제'}
-                disabled={false}
-              />
-              <CommonButton
-                onClick={() => onClickUpdateTodo('바꾸기', true)}
-                text={'수정'}
-                disabled={false}
-              />
-            </div>
-          </div>
+          <TodoListItem
+            key={el.id}
+            id={el.id}
+            todo={el.todo}
+            isCompleted={el.isCompleted}
+          />
         )
-      })
-    }
+      })}
     </>
   )
 }
