@@ -68,6 +68,7 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
             onChange={handleEditTodoTxtChange}
             width={300}
             value={editTodoTxt}
+            placeholder="todo를 입력해주세요"
           />
         ) : (
           <Todo style={{ textDecoration: isCompleted ? 'line-through' : '' }}>
