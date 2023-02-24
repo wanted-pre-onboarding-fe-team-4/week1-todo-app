@@ -15,12 +15,8 @@ API.interceptors.request.use(async (config) => {
 
 API.interceptors.response.use(
   (res) => {
-    if (res.config.url === '/auth/signin') {
+    if (res.config.url === '/auth/signin')
       localStorage.setItem('access_token', res.data.access_token)
-    } 
-    if (res.config.url === '/auth/signin') {
-      console.log('res:', res)
-    }
 
     return res
   },
