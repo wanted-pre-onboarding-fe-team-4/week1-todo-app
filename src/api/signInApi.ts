@@ -13,7 +13,7 @@ export const useSignInApi = () => {
   }
 
   const handleSignInFailure = () => {
-    alert('중복된 이메일입니다.')
+    alert('이메일과 비밀번호를 확인해주세요')
   }
 
   const { query } = useQuery({
