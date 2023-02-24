@@ -46,6 +46,7 @@ export const Todo = () => {
         type='text'
         onChange={handleTodoChange}
         onKeyDown={handleEnter}
+        placeholder="todo를 입력해주세요"
         data-testid='new-todo-input'
       />
       <CommonButton

@@ -68,6 +68,7 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
             onChange={handleEditTodoTxtChange}
             width={300}
             value={editTodoTxt}
+            placeholder="todo를 입력해주세요"
           />
         ) : (
           <Todo style={{ textDecoration: isCompleted ? 'line-through' : '' }}>
@@ -79,7 +80,10 @@ export const TodoListItem = ({ id, todo, isCompleted }: TodoListItemProps) => {
             <>
               <CommonButton
                 width={100}
-                onClick={onClickToggleEdit}
+                onClick={() => {
+                  onClickToggleEdit()
+                  setEditTodoTxt(todo)
+                }}
                 text={'취소'}
                 disabled={false}
                 backgroundColor={colors.red}
